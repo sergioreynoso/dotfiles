@@ -63,8 +63,7 @@ return {
 		local keymap = vim.keymap -- for conciseness
 
 		keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
-		keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
 		keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
-		keymap.set("n", "<leader>e", toggle_nvim_tree_focus, { desc = "Toggle focus on nvim-tree" }) -- toggle focus on nvim-tree
+		keymap.set("n", "<leader>ef", toggle_nvim_tree_focus, { desc = "Toggle focus on nvim-tree" }) -- toggle focus on nvim-tree
 	end,
 }
