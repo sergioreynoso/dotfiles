@@ -1,20 +1,12 @@
 return {
-	"williamboman/mason.nvim",
+	"williamboman/mason.nvim", -- Core Mason plugin for tool management
 	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		"williamboman/mason-lspconfig.nvim", -- Mason support for LSP servers
+		"WhoIsSethDaniel/mason-tool-installer.nvim", -- Mason support for non-LSP tools (e.g., formatters, linters)
 	},
 	config = function()
-		-- import mason
-		local mason = require("mason")
-
-		-- import mason-lspconfig
-		local mason_lspconfig = require("mason-lspconfig")
-
-		local mason_tool_installer = require("mason-tool-installer")
-
-		-- enable mason and configure icons
-		mason.setup({
+		-- 1. Set up Mason UI with custom icons
+		require("mason").setup({
 			ui = {
 				icons = {
 					package_installed = "✓",
@@ -24,8 +16,8 @@ return {
 			},
 		})
 
-		mason_lspconfig.setup({
-			-- list of servers for mason to install
+		-- 2. Install and manage LSP servers using Mason LSPconfig
+		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"ts_ls",
 				"html",
@@ -42,14 +34,15 @@ return {
 			},
 		})
 
-		mason_tool_installer.setup({
+		-- 3. Install and manage formatters and linters using Mason Tool Installer
+		require("mason-tool-installer").setup({
 			ensure_installed = {
-				"prettier", -- prettier formatter
-				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
-				"pylint", -- python linter
-				-- "eslint_d", -- js linter
+				"prettier", -- JS/TS formatter
+				"stylua", -- Lua formatter
+				"isort", -- Python formatter
+				"black", -- Python formatter
+				"pylint", -- Python linter
+				"eslint_d", -- JS/TS linter
 			},
 		})
 	end,
