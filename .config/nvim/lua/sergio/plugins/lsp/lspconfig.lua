@@ -23,54 +23,120 @@ return {
 		end
 
 		-- 4. Define a function to set keybindings for LSP features
-		local on_attach = function(_, bufnr)
-			local opts = { buffer = bufnr, silent = true }
-			local keymap = vim.keymap.set
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				-- Buffer local mappings.
+				-- See `:help vim.lsp.*` for documentation on any of the below functions
+				local opts = { buffer = ev.buf, silent = true }
 
-			keymap("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- Show references
-			keymap("n", "gD", vim.lsp.buf.declaration, opts) -- Go to declaration
-			keymap("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- Show definitions
-			keymap("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- Show implementations
-			keymap("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- Show type definitions
-			keymap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- Code actions
-			keymap("n", "<leader>rn", vim.lsp.buf.rename, opts) -- Rename symbol
-			keymap("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- Show file diagnostics
-			keymap("n", "<leader>d", vim.diagnostic.open_float, opts) -- Show line diagnostics
-			keymap("n", "[d", vim.diagnostic.goto_prev, opts) -- Go to previous diagnostic
-			keymap("n", "]d", vim.diagnostic.goto_next, opts) -- Go to next diagnostic
-			keymap("n", "K", vim.lsp.buf.hover, opts) -- Show hover documentation
-			keymap("n", "<leader>rs", ":LspRestart<CR>", opts) -- Restart LSP server
-		end
+				local keymap = vim.keymap.set
+
+				keymap(
+					"n",
+					"<leader>sr",
+					"<cmd>Telescope lsp_references<CR>",
+					vim.tbl_extend("force", opts, { desc = "Search all references to the symbol under the cursor" })
+				)
+
+				keymap(
+					"n",
+					"<leader>gd",
+					vim.lsp.buf.declaration,
+					vim.tbl_extend("force", opts, { desc = "Go to the declaration of the symbol" })
+				)
+
+				keymap(
+					"n",
+					"<leader>sd",
+					"<cmd>Telescope lsp_definitions<CR>",
+					vim.tbl_extend("force", opts, { desc = "Search all definitions of the symbol under the cursor" })
+				)
+
+				keymap(
+					"n",
+					"<leader>si",
+					"<cmd>Telescope lsp_implementations<CR>",
+					vim.tbl_extend(
+						"force",
+						opts,
+						{ desc = "Search all implementations of the symbol under the cursor" }
+					)
+				)
+
+				keymap(
+					"n",
+					"<leader>st",
+					"<cmd>Telescope lsp_type_definitions<CR>",
+					vim.tbl_extend("force", opts, { desc = "Search type definitions of the symbol under the cursor" })
+				)
+
+				keymap(
+					{ "n", "v" },
+					"<leader>ca",
+					vim.lsp.buf.code_action,
+					vim.tbl_extend("force", opts, { desc = "Show available code actions" })
+				)
+
+				keymap(
+					"n",
+					"<leader>cr",
+					vim.lsp.buf.rename,
+					vim.tbl_extend("force", opts, { desc = "Rename the symbol under the cursor" })
+				)
+
+				keymap(
+					"n",
+					"<leader>df",
+					"<cmd>Telescope diagnostics bufnr=0<CR>",
+					vim.tbl_extend("force", opts, { desc = "Show diagnostics for the current file" })
+				)
+
+				keymap(
+					"n",
+					"<leader>dl",
+					vim.diagnostic.open_float,
+					vim.tbl_extend("force", opts, { desc = "Show diagnostics for the current line" })
+				)
+
+				keymap(
+					"n",
+					"<leader>dp",
+					vim.diagnostic.goto_prev,
+					vim.tbl_extend("force", opts, { desc = "Jump to the previous diagnostic" })
+				)
+
+				keymap(
+					"n",
+					"<leader>dn",
+					vim.diagnostic.goto_next,
+					vim.tbl_extend("force", opts, { desc = "Jump to the next diagnostic" })
+				)
+
+				keymap(
+					"n",
+					"K",
+					vim.lsp.buf.hover,
+					vim.tbl_extend("force", opts, { desc = "Show documentation for the symbol under the cursor" })
+				)
+
+				keymap(
+					"n",
+					"<leader>ts",
+					":LspRestart<CR>",
+					vim.tbl_extend("force", opts, { desc = "Restart the LSP server" })
+				)
+			end,
+		})
 
 		-- 5. Set up Mason LSP handlers for servers
 		mason_lspconfig.setup_handlers({
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
-					on_attach = on_attach,
 				})
 			end,
 			-- Custom configurations for specific servers
-			["svelte"] = function()
-				lspconfig.svelte.setup({
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						on_attach(client, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePost", {
-							pattern = { "*.js", "*.ts" },
-							callback = function(ctx)
-								client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-							end,
-						})
-					end,
-				})
-			end,
-			["graphql"] = function()
-				lspconfig.graphql.setup({
-					capabilities = capabilities,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
 			["emmet_ls"] = function()
 				lspconfig.emmet_ls.setup({
 					capabilities = capabilities,

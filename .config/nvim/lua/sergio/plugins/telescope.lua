@@ -28,14 +28,29 @@ return {
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 
-		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-		keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-		keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
-		keymap.set("n", "<leader>fb", function()
+		keymap.set("n", "<leader>sf", "<cmd>Telescope find_files<cr>", { desc = "Search and open files in the cwd" })
+		keymap.set(
+			"n",
+			"<leader>so",
+			"<cmd>Telescope oldfiles<cr>",
+			{ desc = "Search and open recently accessed files" }
+		)
+		keymap.set(
+			"n",
+			"<leader>sS",
+			"<cmd>Telescope live_grep<cr>",
+			{ desc = "Search for a string in all files in the cwd" }
+		)
+		keymap.set(
+			"n",
+			"<leader>ss",
+			"<cmd>Telescope grep_string<cr>",
+			{ desc = "Search for occurrences of the string under the cursor in the cwd" }
+		)
+		keymap.set("n", "<leader>bf", function()
 			builtin.buffers({
 				ignore_current_buffer = true,
 			})
-		end, { desc = "Show all buffers, except current buffer" })
+		end, { desc = "List all open buffers, excluding the current buffer" })
 	end,
 }

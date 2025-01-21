@@ -11,5 +11,14 @@ return {
 			{ "<auto>", mode = "x" },
 			{ "<leader>", mode = { "n", "v" } },
 		},
+		spec = {
+			{ "<leader>s", group = "Search" },
+			{ "<leader>g", group = "Go To" },
+			{ "<leader>d", group = "Diagnostics" },
+			{ "<leader>e", group = "Explorer" },
+			{ "<leader>b", group = "Buffers" },
+			{ "<leader>w", group = "Windows" },
+			{ "<leader>c", group = "Code Actioins" },
+		},
 	},
 }
