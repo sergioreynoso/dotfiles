@@ -34,9 +34,9 @@ return {
 
 				keymap(
 					"n",
-					"<leader>sr",
+					"<leader>fr",
 					"<cmd>Telescope lsp_references<CR>",
-					vim.tbl_extend("force", opts, { desc = "Search all references to the symbol under the cursor" })
+					vim.tbl_extend("force", opts, { desc = "Find all references to the symbol under the cursor" })
 				)
 
 				keymap(
@@ -48,27 +48,23 @@ return {
 
 				keymap(
 					"n",
-					"<leader>sd",
+					"<leader>fd",
 					"<cmd>Telescope lsp_definitions<CR>",
-					vim.tbl_extend("force", opts, { desc = "Search all definitions of the symbol under the cursor" })
+					vim.tbl_extend("force", opts, { desc = "Find all definitions of the symbol under the cursor" })
 				)
 
 				keymap(
 					"n",
-					"<leader>si",
+					"<leader>fi",
 					"<cmd>Telescope lsp_implementations<CR>",
-					vim.tbl_extend(
-						"force",
-						opts,
-						{ desc = "Search all implementations of the symbol under the cursor" }
-					)
+					vim.tbl_extend("force", opts, { desc = "Find all implementations of the symbol under the cursor" })
 				)
 
 				keymap(
 					"n",
-					"<leader>st",
+					"<leader>ft",
 					"<cmd>Telescope lsp_type_definitions<CR>",
-					vim.tbl_extend("force", opts, { desc = "Search type definitions of the symbol under the cursor" })
+					vim.tbl_extend("force", opts, { desc = "Find type definitions of the symbol under the cursor" })
 				)
 
 				keymap(

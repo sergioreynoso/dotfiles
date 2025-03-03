@@ -2,11 +2,11 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap -- for conciseness
 
--- keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- keymap.set("n", "<leader>fe", vim.cmd.Ex)
 
 keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
 
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+keymap.set("n", "<leader>C", ":nohl<CR>", { desc = "Clear search highlights" })
 
 -- increment/decrement numbers
 keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment
@@ -34,5 +34,5 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 
 -- Manage buffers
 keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
-keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Move to the next buffer" })
-keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "Move to the previous buffer" })
+keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Move to the next buffer" })
+keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Move to the previous buffer" })

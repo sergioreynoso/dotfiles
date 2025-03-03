@@ -28,29 +28,24 @@ return {
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 
-		keymap.set("n", "<leader>sf", "<cmd>Telescope find_files<cr>", { desc = "Search and open files in the cwd" })
+		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find and open files in the cwd" })
+		keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Find recently opened files" })
 		keymap.set(
 			"n",
-			"<leader>so",
-			"<cmd>Telescope oldfiles<cr>",
-			{ desc = "Search and open recently accessed files" }
-		)
-		keymap.set(
-			"n",
-			"<leader>sS",
+			"<leader>fS",
 			"<cmd>Telescope live_grep<cr>",
-			{ desc = "Search for a string in all files in the cwd" }
+			{ desc = "Find for a string in all files in the cwd (Live Grep)" }
 		)
 		keymap.set(
 			"n",
-			"<leader>ss",
+			"<leader>fs",
 			"<cmd>Telescope grep_string<cr>",
-			{ desc = "Search for occurrences of the string under the cursor in the cwd" }
+			{ desc = "Find for occurrences of the string under the cursor in the cwd (Grep String)" }
 		)
 		keymap.set("n", "<leader>bf", function()
 			builtin.buffers({
 				ignore_current_buffer = true,
 			})
-		end, { desc = "List all open buffers, excluding the current buffer" })
+		end, { desc = "List all open buffers, excluding the current buffer " })
 	end,
 }

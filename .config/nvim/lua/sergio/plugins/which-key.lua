@@ -12,7 +12,7 @@ return {
 			{ "<leader>", mode = { "n", "v" } },
 		},
 		spec = {
-			{ "<leader>s", group = "Search" },
+			{ "<leader>f", group = "Find" },
 			{ "<leader>g", group = "Go To" },
 			{ "<leader>d", group = "Diagnostics" },
 			{ "<leader>e", group = "Explorer" },
