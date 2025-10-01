@@ -1,7 +1,7 @@
 return {
-	"williamboman/mason.nvim", -- Core Mason plugin for tool management
+	"mason-org/mason.nvim", -- Core Mason plugin for tool management
 	dependencies = {
-		"williamboman/mason-lspconfig.nvim", -- Mason support for LSP servers
+		"mason-org/mason-lspconfig.nvim", -- Mason support for LSP servers
 		"WhoIsSethDaniel/mason-tool-installer.nvim", -- Mason support for non-LSP tools (e.g., formatters, linters)
 	},
 	config = function()
@@ -28,7 +28,6 @@ return {
 				"graphql",
 				"emmet_ls",
 				"prismals",
-				"pyright",
 				"gopls",
 				"golangci_lint_ls",
 			},
@@ -39,9 +38,6 @@ return {
 			ensure_installed = {
 				"prettier", -- JS/TS formatter
 				"stylua", -- Lua formatter
-				"isort", -- Python formatter
-				"black", -- Python formatter
-				"pylint", -- Python linter
 				"eslint_d", -- JS/TS linter
 			},
 		})
